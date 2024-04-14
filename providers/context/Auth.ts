@@ -6,10 +6,12 @@ export const AuthContext = React.createContext<{
     signOut: () => void;
     session?: string | null;
     isLoading: boolean;
+    error?: string | null;
   }>({
-    signIn: () => null,
+    signIn: () => null, 
     signOut: () => null,
     session: null,
     isLoading: false,
+    error: null
   });
   
