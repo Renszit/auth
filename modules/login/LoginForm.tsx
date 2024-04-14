@@ -25,6 +25,10 @@ const styles = StyleSheet.create({
     color: "red",
     textAlign: "center",
   },
+  errorWrapper: {
+    margin: 10,
+    padding: 10,
+  },
 });
 
 const LoginForm = () => {
@@ -34,11 +38,10 @@ const LoginForm = () => {
     formState: { errors },
   } = useForm();
 
-  const { signIn, error } = useSession();
+  const { signIn } = useSession();
 
   return (
     <View style={styles.container}>
-      {error && <Text style={styles.error}>{error}</Text>}
       {/* Username Input */}
       <Controller
         control={control}

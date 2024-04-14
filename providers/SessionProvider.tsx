@@ -9,10 +9,10 @@ import { v4 as uuidv4 } from "uuid";
 import axios from "axios";
 import { router } from "expo-router";
 import { useState } from "react";
+import { Alert } from "react-native";
 
 export function SessionProvider(props: React.PropsWithChildren) {
   const [[isLoading, session], setSession] = useStorageState("session");
-  const [error, setError] = useState<string | null>(null);
 
   const loginUser = async (data: FieldValues) => {
     // set custom uuid for device, since ios does not provide a unique id, this is a workaround
@@ -30,13 +30,12 @@ export function SessionProvider(props: React.PropsWithChildren) {
       password: data.password,
       device_id: uuid,
     };
-    setError(null);
 
     axios
       .post("https://testapp.teechr.de/app/login", loginData)
       .then(({ data }) => {
         if (data.error) {
-          setError(data.error.messages[0]);
+          Alert.alert("Error", data.error.messages[0]);
         }
         if (data.token) {
           setSession(data.token);
@@ -44,7 +43,7 @@ export function SessionProvider(props: React.PropsWithChildren) {
         }
       })
       .catch(() => {
-        setError("An error occurred, please try again later.");
+        Alert.alert("Error", "An error occurred, please try again later.");
       });
   };
 
@@ -59,7 +58,6 @@ export function SessionProvider(props: React.PropsWithChildren) {
         },
         session,
         isLoading,
-        error,
       }}
     >
       {props.children}
