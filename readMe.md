@@ -1,28 +1,55 @@
+# Auth Example Expo
 
-# Auth example expo
+This project is an example of how to implement authentication, authorization, and session management in an Expo app.
 
 ## Features
 
-- [x] Authentication
-- [x] Authorization
-- [x] Session management
+- Authentication: Users can sign in to the app.
+- Authorization: Controls access to certain parts of the app based on user roles.
+- Session Management: Handles user sessions, including sign in and sign out.
 
-## Installation
+## Tech Stack
 
-[Provide instructions on how to install and set up your project]
+- [Expo](https://expo.dev/): A framework and a platform for universal React applications.
+- [React Native](https://reactnative.dev/): A framework for building native apps using React.
+- [React Hook Form](https://react-hook-form.com/): A library to create forms in React.
+- [Axios](https://axios-http.com/): A promise-based HTTP client for the browser and node.js.
+- [UUID](https://www.npmjs.com/package/uuid): For the creation of RFC4122 UUIDs.
+- [Expo Secure Store](https://docs.expo.dev/versions/latest/sdk/securestore/): A secure place to store sensitive data in an Expo app.
 
-## Usage
+## Implementation
 
-[Explain how to use your project, including any necessary commands or configurations]
+- The [`SessionProvider`](providers/SessionProvider.tsx) component uses the `useStorageState` hook to manage session state.
+- The [`useSession`](hooks/useSession.ts) hook provides functions to sign in and sign out.
+- The [`HomeScreen`](app/(app)/index.tsx) component uses the `useSession` hook to sign out.
+- The [`CustomButton`](components/CustomButton.tsx) component is a reusable button component.
 
-## Contributing
+## Getting Started
 
-[Explain how others can contribute to your project]
+1. Install the dependencies by running the following command in your terminal:
 
-## License
+```bash
+npm install
+```
 
-[Specify the license under which your project is distributed]
+2. Start the Expo development server by running the following command:
 
-## Contact
+```bash
+npx expo start
+```
 
-[Provide contact information for users to reach out to you]
+3. Open the Expo app on your device and scan the QR code displayed in the terminal or in the Expo Dev Tools page that opens in your web browser.
+
+For android: 
+
+```bash
+npm run android
+```
+
+For ios:
+
+```bash
+npm run ios
+```
+
+
