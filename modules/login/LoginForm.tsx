@@ -1,26 +1,28 @@
-// Import necessary modules
 import React from "react";
-import {
-  View,
-  Text,
-  TextInput,
-  Button,
-  StyleSheet,
-  Pressable,
-} from "react-native";
+import { View, Text, TextInput, StyleSheet } from "react-native";
 import { useForm, Controller, FieldValues } from "react-hook-form";
 import { useSession } from "../../hooks/useSession";
+import { appColors } from "../../constants/theme";
+import CustomButton from "../../components/CustomButton";
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
   input: {
     height: 40,
+    width: 200,
+    color: appColors.text,
     margin: 12,
     borderWidth: 1,
+    borderRadius: 10,
+    paddingHorizontal: 10,
+    backgroundColor: appColors.secondary,
   },
-  button: {
-    backgroundColor: "blue",
-    color: "white",
-    padding: 10,
+  error: {
+    color: "red",
   },
 });
 
@@ -34,7 +36,7 @@ const LoginForm = () => {
   const { signIn } = useSession();
 
   return (
-    <View>
+    <View style={styles.container}>
       {/* Username Input */}
       <Controller
         control={control}
@@ -44,6 +46,7 @@ const LoginForm = () => {
             placeholder="Email"
             onBlur={onBlur}
             onChangeText={onChange}
+            placeholderTextColor={appColors.text}
             value={value}
           />
         )}
@@ -51,7 +54,9 @@ const LoginForm = () => {
         rules={{ required: true }}
         defaultValue=""
       />
-      {errors.email && <Text>This field is required.</Text>}
+      {errors.email && (
+        <Text style={styles.error}>This field is required.</Text>
+      )}
 
       {/* Password Input */}
       <Controller
@@ -60,6 +65,7 @@ const LoginForm = () => {
           <TextInput
             style={styles.input}
             placeholder="Password"
+            placeholderTextColor={appColors.text}
             onBlur={onBlur}
             onChangeText={onChange}
             value={value}
@@ -70,12 +76,12 @@ const LoginForm = () => {
         rules={{ required: true }}
         defaultValue=""
       />
-      {errors.password && <Text>This field is required.</Text>}
+      {errors.password && (
+        <Text style={styles.error}>This field is required.</Text>
+      )}
 
       {/* Submit Button */}
-      <Pressable onPress={handleSubmit(signIn)}>
-        <Text style={styles.button}>Submit</Text>
-      </Pressable>
+      <CustomButton label="Submit" onPress={handleSubmit(signIn)} />
     </View>
   );
 };

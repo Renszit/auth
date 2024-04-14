@@ -31,8 +31,8 @@ export function SessionProvider(props: React.PropsWithChildren) {
     axios
       .post("https://testapp.teechr.de/app/login", loginData)
       .then(({ data }) => {
-        console.log(data);
         if (data.token) {
+          console.log(data.token);
           setSession(data.token);
           router.push("/");
         }
