@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Text, TextInput, StyleSheet } from "react-native";
-import { useForm, Controller, FieldValues } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import { useSession } from "../../hooks/useSession";
 import { appColors } from "../../constants/theme";
 import CustomButton from "../../components/CustomButton";
@@ -59,9 +59,7 @@ const LoginForm = () => {
         rules={{ required: true }}
         defaultValue=""
       />
-      {errors.email && (
-        <Text style={styles.error}>This field is required.</Text>
-      )}
+      {errors.email && <Text style={styles.error}>This field is required.</Text>}
 
       {/* Password Input */}
       <Controller
@@ -81,9 +79,7 @@ const LoginForm = () => {
         rules={{ required: true }}
         defaultValue=""
       />
-      {errors.password && (
-        <Text style={styles.error}>This field is required.</Text>
-      )}
+      {errors.password && <Text style={styles.error}>This field is required.</Text>}
 
       {/* Submit Button */}
       <CustomButton label="Submit" onPress={handleSubmit(signIn)} />

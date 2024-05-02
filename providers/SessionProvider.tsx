@@ -8,8 +8,19 @@ import { v4 as uuidv4 } from "uuid";
 
 import axios from "axios";
 import { router } from "expo-router";
-import { useState } from "react";
 import { Alert } from "react-native";
+
+import MockAdapter from "axios-mock-adapter";
+
+const mock = new MockAdapter(axios);
+
+mock.onPost("https://local/test").reply(200, {
+  token: "test",
+  user: {
+    id: 1,
+    email: "",
+  },
+});
 
 export function SessionProvider(props: React.PropsWithChildren) {
   const [[isLoading, session], setSession] = useStorageState("session");
@@ -32,7 +43,7 @@ export function SessionProvider(props: React.PropsWithChildren) {
     };
 
     axios
-      .post("https://testapp.teechr.de/app/login", loginData)
+      .post("https://local/test", loginData)
       .then(({ data }) => {
         if (data.error) {
           Alert.alert("Error", data.error.messages[0]);
